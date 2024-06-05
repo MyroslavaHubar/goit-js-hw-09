@@ -1,0 +1,15 @@
+@import url(./gallery.css);
+@import url(./form.css);
+
+.nav-link {
+  display: block;
+  margin: 15px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: aliceblue;
+  color: #2e2f42;
+  width: 90px;
+  text-decoration: none;
+  text-align: center;
+}
