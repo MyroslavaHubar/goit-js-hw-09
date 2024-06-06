@@ -1,19 +1,17 @@
-const formData = {
-  email: '',
-  message: '',
-};
+const formFeedbackElem = document.querySelector('.feedback-form');
+const textareaElem = formFeedbackElem.querySelector('textarea');
+const inputElem = formFeedbackElem.querySelector('input');
 
-const form = document.querySelector('.feedback-form');
-const textareaElem = form.querySelector('textarea');
-const inputElem = form.querySelector('input');
+formFeedbackElem.addEventListener('input', () => {
+  const form = new FormData(formFeedbackElem);
+  const email = form.get('email');
+  const message = form.get('message');
+  const formData = {
+    email,
+    message,
+  };
 
-formElem.addEventListener('input', () => {
-  const formData = new FormData(formElem);
-  const email = formData.get('email');
-  const message = formData.get('message');
-
-  saveToLs('feedback-form-state', email);
-  saveToLs('feedback-form-state', message);
+  saveToLS('feedback-form-state', formData);
 });
 
 function saveToLS(key, value) {
@@ -31,10 +29,10 @@ function loadFromLS(key) {
   }
 }
 
-form.addEventListener('submit', e => {
+formFeedbackElem.addEventListener('submit', e => {
   e.preventDefault();
 
-  const formData = new FormData(formElem);
+  const formData = new FormData(formFeedbackElem);
   const email = formData.get('email');
   const message = formData.get('message');
 
@@ -45,7 +43,7 @@ form.addEventListener('submit', e => {
 
   console.log(data);
 
-  form.reset();
+  formFeedbackElem.reset();
 
   localStorage.removeItem('feedback-form-state');
 });
@@ -53,6 +51,6 @@ form.addEventListener('submit', e => {
 window.addEventListener('DOMContentLoaded', () => {
   const data = loadFromLS('feedback-form-state');
 
-  form.elements.email.value = data?.email ?? '';
-  form.elements.message.value = data?.message ?? '';
+  formFeedbackElem.elements.email.value = data?.email ?? '';
+  formFeedbackElem.elements.message.value = data?.message ?? '';
 });
